@@ -30,17 +30,17 @@ android {
         versionCode = 1
         versionName = "1.0"
     }
-    flavorDimensions += "enviroment"
+    flavorDimensions += "environment"
     productFlavors {
-        create( name = "dev"){
-            dimension = "enviroment"
+        create("dev"){
+            dimension = "environment"
             applicationIdSuffix = ".dev"
-            resValue(type="string",name="app_name", value="app-dev")
+            resValue("string","app_name", "app-dev")
         }
-        create(name = "prod"){
-            dimension = "enviroment"
+        create("prod"){
+            dimension = "environment"
             applicationIdSuffix = ".app"
-            resValue(type="string",name="app_name", value="app-prod")
+            resValue("string","app_name", "app-prod")
         }
     }
     
@@ -64,6 +64,7 @@ android {
     }
     buildFeatures {
         compose = true
+        resValues = true
     }
 
 }
