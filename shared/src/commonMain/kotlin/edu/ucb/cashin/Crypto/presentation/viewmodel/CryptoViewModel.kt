@@ -48,7 +48,7 @@ class CryptoViewModel(
                     }
                 },
                 onFailure = { error ->
-                    val message = error.message ?: "No se pudieron cargar las criptomonedas"
+                    val message = error.message ?: "No se pudieron cargar las cryptos"
                     _state.update { currentState ->
                         currentState.copy(isLoading = false, error = message)
                     }
