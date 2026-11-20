@@ -1,0 +1,19 @@
+{
+  "name": "cashin-appium-tests",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pruebas de interfaz Android para CashIn",
+  "type": "module",
+  "scripts": {
+    "server": "appium",
+    "doctor": "appium driver doctor uiautomator2",
+    "test": "node --test --test-concurrency=1 test/*.test.mjs",
+    "test:happy": "node --test test/app.test.mjs",
+    "test:errors": "node --test test/robustness.test.mjs"
+  },
+  "devDependencies": {
+    "appium": "3.9.0",
+    "appium-uiautomator2-driver": "8.7.3",
+    "webdriverio": "9.32.0"
+  }
+}

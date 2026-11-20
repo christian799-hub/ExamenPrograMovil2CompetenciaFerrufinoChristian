@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import edu.ucb.cashin.Crypto.presentation.viewmodel.CryptoViewModel
 import org.koin.compose.viewmodel.koinViewModel
@@ -27,21 +28,21 @@ fun CryptoScreen(
         modifier = Modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        Text("Cryptos Precio A Tiempo Real")
+        Text("Cryptos Precio A Tiempo Real", modifier = Modifier.testTag("crypto-title"))
 
-        state.error?.let { message -> Text(message) }
+        state.error?.let { message -> Text(message, modifier = Modifier.testTag("crypto-error")) }
 
         LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             items(state.cryptos, key = { crypto -> crypto.id }) { crypto ->
-                Card(modifier = Modifier.fillMaxWidth()) {
+                Card(modifier = Modifier.fillMaxWidth().testTag("crypto-card")) {
                     Column {
                         Text(
                             text = crypto.name,
-                            modifier = Modifier.padding(16.dp),
+                            modifier = Modifier.padding(16.dp).testTag("crypto-name"),
                         )
                         Text(
                             text = "${crypto.currentPrice}",
-                            modifier = Modifier.padding(16.dp),
+                            modifier = Modifier.padding(16.dp).testTag("crypto-price"),
                         )
                     }
                 }

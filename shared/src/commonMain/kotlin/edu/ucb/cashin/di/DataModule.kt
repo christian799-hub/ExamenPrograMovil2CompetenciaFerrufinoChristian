@@ -4,6 +4,9 @@ import edu.ucb.cashin.Crypto.data.datasource.CryptoRemoteDataSource
 import edu.ucb.cashin.Crypto.data.repository.CryptoRepositoryImpl
 import edu.ucb.cashin.Crypto.data.service.CryptoService
 import edu.ucb.cashin.Crypto.domain.repository.CryptoRepository as CryptoRepositoryContract
+import edu.ucb.cashin.exchange.data.datasource.RealTimeDataBase
+import edu.ucb.cashin.exchange.data.repository.ExchangeRepositoryImpl
+import edu.ucb.cashin.exchange.domain.repository.ExchangeRepository
 import edu.ucb.cashin.movie.data.datasource.CatalogRemoteDataSource
 import edu.ucb.cashin.movie.data.repository.CatalogRepositoryImpl
 import edu.ucb.cashin.movie.data.service.CatalogService
@@ -17,4 +20,6 @@ val dataModule = module {
     single<CatalogRepository> { CatalogRepositoryImpl(get()) }
     single<CryptoRemoteDataSource> { CryptoService() }
     single<CryptoRepositoryContract> { CryptoRepositoryImpl(get()) }
+    single { RealTimeDataBase() }
+    single<ExchangeRepository> { ExchangeRepositoryImpl(get()) }
 }

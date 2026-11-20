@@ -17,6 +17,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import edu.ucb.cashin.movie.presentation.screen.viewmodel.CatalogViewModel
@@ -48,7 +49,7 @@ fun CatalogScreen(
         modifier = Modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        Text("Cartelera")
+        Text("Cartelera", modifier = Modifier.testTag("movies-title"))
 
         // El indicador aparece mientras llega la respuesta del API.
 
@@ -56,24 +57,25 @@ fun CatalogScreen(
             CircularProgressIndicator()
         }
         // let ejecuta el bloque solamente cuando error no es null.
-        state.error?.let { message -> Text(message) }
+        state.error?.let { message -> Text(message, modifier = Modifier.testTag("movies-error")) }
 
         // LazyColumn crea únicamente los elementos visibles de la lista.
         LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             items(state.movies, key = { movie -> movie.id }) { movie ->
                 // Cada película se presenta como una unidad visual independiente.
-                Card(modifier = Modifier.fillMaxWidth()) {
+                Card(modifier = Modifier.fillMaxWidth().testTag("movie-card")) {
                     Column {
                         // TMDB entrega una ruta parcial; aquí se forma la URL completa del póster.
                         AsyncImage(
                             model = "https://image.tmdb.org/t/p/w500${movie.posterPath}",
                             contentDescription = "Póster de ${movie.title}",
                             contentScale = ContentScale.Crop,
+                            modifier = Modifier.testTag("movie-poster"),
                         )
 
                         Text(
                             text = movie.title,
-                            modifier = Modifier.padding(16.dp),
+                            modifier = Modifier.padding(16.dp).testTag("movie-title"),
                         )
                     }
                 }

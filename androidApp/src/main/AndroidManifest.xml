@@ -3,6 +3,7 @@
 
     <!-- Permite que Ktor se comunique con el API de TMDB. -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".MainApp"

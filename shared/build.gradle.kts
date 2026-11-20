@@ -6,6 +6,18 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.wire)
+}
+
+wire {
+    sourcePath {
+        srcDir("src/commonMain/proto")
+    }
+
+    kotlin {
+        rpcRole = "client"
+        rpcCallStyle = "suspending"
+    }
 }
 
 kotlin {
@@ -25,7 +37,7 @@ kotlin {
        minSdk = libs.versions.android.minSdk.get().toInt()
     
        compilerOptions {
-           jvmTarget = JvmTarget.JVM_11
+           jvmTarget = JvmTarget.JVM_17
        }
        androidResources {
            enable = true
@@ -46,6 +58,7 @@ kotlin {
             implementation(libs.compose.uiTooling)
             implementation(libs.koin.android)
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.androidx.work.runtime.ktx)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -64,6 +77,9 @@ kotlin {
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.firebase.database)
+            implementation(libs.wire.runtime)
+            implementation(libs.wire.grpc.client)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
